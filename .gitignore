@@ -1,0 +1,11 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+/QuickSort/dist/
+/QuickSort/build/
+
+# Backup files
+*~
