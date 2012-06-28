@@ -10,6 +10,6 @@ package quicksort;
  */
 public enum PivotPosition {
     
-    LEFT, RIGHT, MID, RANDOM;
+    LEFT, RIGHT, MID, RANDOM, MEDIAN;
     
 }

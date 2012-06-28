@@ -5,8 +5,6 @@
 package quicksort;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -52,29 +50,29 @@ public class Main {
         for (int i=0; i<dataToCheck.length; i++) {
             dataToCheck[i] = data.get(i).intValue();
         }
-        System.out.println("Date read time: " + (System.currentTimeMillis()-start) + " ms");
+        System.out.println("Date read \tTime: " + (System.currentTimeMillis()-start) + " ms");
         
         Sorter sorter = new Sorter();
         // run it once to warm the JIT up.
         sorter.sort(dataToCheck);
 
-     
+        long result;
 
-        sorter.setPivotPosition(PivotPosition.MID);
-        sorter.setNumberSteps(0);
-        start = System.currentTimeMillis();
-        sorter.sort(dataToCheck);
-        long result = sorter.getNumberSteps();
-        System.out.println("MID, time: " + (System.currentTimeMillis()-start) + " ms");
-        System.out.println("Final count: " + result);        
+//        sorter.setPivotPosition(PivotPosition.MID);
+//        sorter.setNumberSteps(0);
+//        start = System.currentTimeMillis();
+//        sorter.sort(dataToCheck);
+//        result = sorter.getNumberSteps();
+//        System.out.println("MID\n\tTime: " + (System.currentTimeMillis()-start) + " ms");
+//        System.out.println("\tFinal count: " + result);        
         
         sorter.setPivotPosition(PivotPosition.LEFT);
         sorter.setNumberSteps(0);
         start = System.currentTimeMillis();
         sorter.sort(dataToCheck);
         result = sorter.getNumberSteps();
-        System.out.println("LEFT, time: " + (System.currentTimeMillis()-start) + " ms");
-        System.out.println("Final count: " + result);        
+        System.out.println("LEFT\n\tTime: " + (System.currentTimeMillis()-start) + " ms");
+        System.out.println("\tFinal count: " + result);        
         
         
         sorter.setPivotPosition(PivotPosition.RIGHT);
@@ -82,16 +80,24 @@ public class Main {
         start = System.currentTimeMillis();
         sorter.sort(dataToCheck);
         result = sorter.getNumberSteps();
-        System.out.println("RIGHT, time: " + (System.currentTimeMillis()-start) + " ms");
-        System.out.println("Final count: " + result);   
+        System.out.println("RIGHT\n\tTime: " + (System.currentTimeMillis()-start) + " ms");
+        System.out.println("\tFinal count: " + result);   
         
-        sorter.setPivotPosition(PivotPosition.RANDOM);
+//        sorter.setPivotPosition(PivotPosition.RANDOM);
+//        sorter.setNumberSteps(0);
+//        start = System.currentTimeMillis();
+//        sorter.sort(dataToCheck);
+//        result = sorter.getNumberSteps();
+//        System.out.println("RANDOM\n\tTime: " + (System.currentTimeMillis()-start) + " ms");
+//        System.out.println("\tFinal count: " + result);        
+        
+        sorter.setPivotPosition(PivotPosition.MEDIAN);
         sorter.setNumberSteps(0);
         start = System.currentTimeMillis();
         sorter.sort(dataToCheck);
         result = sorter.getNumberSteps();
-        System.out.println("RANDOM, time: " + (System.currentTimeMillis()-start) + " ms");
-        System.out.println("Final count: " + result);         
+        System.out.println("MEDIAN\n\tTime: " + (System.currentTimeMillis()-start) + " ms");
+        System.out.println("\tFinal count: " + result);          
     }
     
 }
