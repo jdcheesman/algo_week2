@@ -55,13 +55,15 @@ public class SorterTest2 {
     @Test
     public void testsort2() {
         System.out.println("testsort2");
-        int[] unsorted = {1,2};
+        int[] unsorted = new int[]{1,2};
         int[] sorted = {1,2};
 
         sorter.setPivotPosition(PivotPosition.LEFT);
         runTest(sorted, unsorted, 1);
+        unsorted = new int[]{1,2};
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, unsorted, 1);
+        unsorted = new int[]{1,2};
         sorter.setPivotPosition(PivotPosition.MEDIAN);
         runTest(sorted, unsorted, 1);
     }    
@@ -74,8 +76,10 @@ public class SorterTest2 {
 
         sorter.setPivotPosition(PivotPosition.LEFT);
         runTest(sorted, unsorted, 3);
+        unsorted = new int[]{1,2,3};
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, unsorted, 3);
+        unsorted = new int[]{1,2,3};
         sorter.setPivotPosition(PivotPosition.MEDIAN);
         runTest(sorted, unsorted, 2);
     }
@@ -88,8 +92,10 @@ public class SorterTest2 {
 
         sorter.setPivotPosition(PivotPosition.LEFT);
         runTest(sorted, unsorted, 6);
+        unsorted = new int[]{1,2,3,4};
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, unsorted, 6);
+        unsorted = new int[]{1,2,3,4};
         sorter.setPivotPosition(PivotPosition.MEDIAN);
         runTest(sorted, unsorted, 4);
     }        
@@ -103,8 +109,10 @@ public class SorterTest2 {
 
         sorter.setPivotPosition(PivotPosition.LEFT);
         runTest(sorted, unsorted, 11);
+        unsorted = new int[]{9,6,3,7,2,4};
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, unsorted, 9);
+        unsorted = new int[]{9,6,3,7,2,4};
         sorter.setPivotPosition(PivotPosition.MEDIAN);
         runTest(sorted, unsorted, 8);
     }
@@ -117,8 +125,10 @@ public class SorterTest2 {
 
         sorter.setPivotPosition(PivotPosition.LEFT);
         runTest(sorted, unsorted, 13);
+        unsorted = new int[]{9,6,3,7,4,2};
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, unsorted, 13);
+        unsorted = new int[]{9,6,3,7,4,2};
         sorter.setPivotPosition(PivotPosition.MEDIAN);
         runTest(sorted, unsorted, 9);
     }    
@@ -135,34 +145,34 @@ ARRAY: 1;11;5;15;2;999;3;2;98;765;8;14;15;16;88;145;100;12;9;99;77;0    # of com
          */
         int[] unsorted = new int[]{0, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         sorter.setPivotPosition(PivotPosition.MEDIAN);
-        sorter.quickSort(unsorted);
+        sorter.sort(unsorted);
         assertEquals(25, sorter.getNumberSteps());
         
         unsorted = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         sorter.setPivotPosition(PivotPosition.MEDIAN);
-        sorter.quickSort(unsorted);
+        sorter.sort(unsorted);
         assertEquals(19, sorter.getNumberSteps());
 
         unsorted = new int[]{1, 11, 5, 15, 2, 12, 9, 99, 77, 0};
         sorter.setPivotPosition(PivotPosition.MEDIAN);
-        sorter.quickSort(unsorted);
+        sorter.sort(unsorted);
         assertEquals(22, sorter.getNumberSteps());
         
         unsorted = new int[]{999, 3, 2, 98, 765, 8, 14, 15, 16, 88, 145, 100};
         sorter.setPivotPosition(PivotPosition.MEDIAN);
-        sorter.quickSort(unsorted);
+        sorter.sort(unsorted);
         assertEquals(29, sorter.getNumberSteps());
  
         unsorted = new int[]{1, 11, 5, 15, 2, 999, 3, 2, 98, 765, 8, 14, 15, 16, 88, 145, 100, 12, 9, 99, 77, 0};
         sorter.setPivotPosition(PivotPosition.MEDIAN);
-        sorter.quickSort(unsorted);
-        assertEquals(82, sorter.getNumberSteps());        
+        sorter.sort(unsorted);
+        assertEquals(82, sorter.getNumberSteps());
     }
     
     private void runTest(int[] sorted, int[] unsorted, int steps) {
-        int[] done = sorter.sort(unsorted);
-        assertEquals(sorted.length, done.length);
-        assertArrayEquals(sorted, done);
+        sorter.sort(unsorted);
+        assertEquals(sorted.length, unsorted.length);
+        assertArrayEquals(sorted, unsorted);
         assertEquals(steps, sorter.getNumberSteps());
     }
 
@@ -190,12 +200,15 @@ ARRAY: 1;11;5;15;2;999;3;2;98;765;8;14;15;16;88;145;100;12;9;99;77;0    # of com
 
     @Test
     public void testPivot3() {
-        int[] sorted = {1,2};
+        int[] sorted = new int[]{1,2};
         assertEquals(1, sorter.getPivot(sorted, PivotPosition.LEFT));
+        sorted = new int[]{1,2};
         assertEquals(2, sorter.getPivot(sorted, PivotPosition.RIGHT));
+        sorted = new int[]{1,2};
         assertEquals(1, sorter.getPivot(sorted, PivotPosition.MID));
+        sorted = new int[]{1,2};
         assertEquals(2, sorter.getPivot(sorted, PivotPosition.MEDIAN));
-        
+        sorted = new int[]{1,2};
         assertEquals(2, sorter.getPivot(sorted, 0, sorted.length-1, PivotPosition.MEDIAN));
     }    
 

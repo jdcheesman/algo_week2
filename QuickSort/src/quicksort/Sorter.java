@@ -26,6 +26,8 @@ public class Sorter {
         
         int pivot = getPivot(toSort, pivotPosition);
         
+        if (pivotPosition == PivotPosition.MEDIAN) System.out.println("Pivot: " + pivot);
+        
         int[] left = new int[toSort.length];
         int lIndex = 0;
         int[] right = new int[toSort.length];
@@ -56,12 +58,14 @@ public class Sorter {
         return result;
     }
     
-    public int getPivot(final int[] toSort, final PivotPosition pp) {
+    public int getPivot(int[] toSort, final PivotPosition pp) {
         if (pp == PivotPosition.LEFT) {
             return toSort[0];
         }
         else if (pp == PivotPosition.RIGHT) {
-            return toSort[toSort.length-1];
+            int pivot = toSort[toSort.length-1];
+            swap(toSort, 0, toSort.length-1);
+            return pivot;
         }
         else if (pp == PivotPosition.RANDOM) {
             int pivotPosn = (int)(Math.random()*(toSort.length-1));
@@ -74,14 +78,18 @@ public class Sorter {
         }
         
         if (pp == PivotPosition.MEDIAN) {
+            System.out.println(midPosn);
             int val0 = toSort[0];
             int val1 = toSort[midPosn];
             int val2 = toSort[toSort.length-1];
             int max = Math.max(val0,Math.max(val1, val2));
             int min = Math.min(val0,Math.min(val1, val2));
-            if (val0 < max && val0 > min) return val0;
-            if (val1 < max && val1 > min) return val1;
-            return val2;
+            int pivot = val2;
+            if (val0 < max && val0 > min) pivot = val0;
+            if (val1 < max && val1 > min) pivot = val1;
+            if (pivot == val1) swap(toSort, midPosn, 0);
+            if (pivot == val2)swap(toSort, 0, toSort.length-1);
+            return pivot;
         }
         return toSort[midPosn];
     }    
@@ -108,46 +116,7 @@ public class Sorter {
         this.pivotPosition = pivotPosition;
         numberSteps=0;
     }    
-    
-    // pre: array is full, all elements are non-null integers
-    // post: the array is sorted in ascending order
-    public void quickSort(int array[]) {
-        numberSteps = 0;
-        quickSort(array, 0, array.length - 1);              // quicksort all the elements in the array
-    }
-
-    public void quickSort(int array[], int start, int end) {
-
-        int i = start;                          // index of left-to-right scan
-        int k = end;                            // index of right-to-left scan
-
-        if (end - start >= 1) // check that there are at least two elements to sort
-        {
-            numberSteps += end - start;
-//                    int pivot = array[start];       // set the pivot as the first element in the partition
-            int pivot = getPivot(array, start, end, pivotPosition);
-
-            while (k > i) // while the scan indices from left and right have not met,
-            {
-                while (array[i] <= pivot && i <= end && k > i) // from the left, look for the first
-                {
-                    i++;                                    // element greater than the pivot
-                }
-                while (array[k] > pivot && k >= start && k >= i) // from the right, look for the first
-                {
-                    k--;                                        // element not greater than the pivot
-                }
-                if (k > i) // if the left seekindex is still smaller than
-                {
-                    swap(array, i, k);                      // the right index, swap the corresponding elements
-                }
-            }
-            swap(array, start, k);          // after the indices have crossed, swap the last element in
-            // the left partition with the pivot 
-            quickSort(array, start, k - 1); // quicksort the left partition
-            quickSort(array, k + 1, end);   // quicksort the right partition
-        }
-    }
+  
 
     // pre: array is full and index1, index2 < array.length
     // post: the values at indices 1 and 2 have been swapped
@@ -157,32 +126,5 @@ public class Sorter {
         array[index2] = temp;               // copy the value of the temp into the second
     }
     
-    public int getPivot(int array[], int start, int end, PivotPosition pp) {
-        int pivot;
-        if (pp == PivotPosition.MEDIAN) {
-            int midPosn = ((end-start) / 2) + start;
 
-            int val0 = array[start];
-            int val1 = array[midPosn];
-            int val2 = array[end];
-            int max = Math.max(val0, Math.max(val1, val2));
-            int min = Math.min(val0, Math.min(val1, val2));
-            if (val0 < max && val0 > min) {
-                pivot = val0;
-            }
-            else if (val1 < max && val1 > min) {
-                pivot = val1;
-            }
-            else {
-                pivot = val2;
-            }
-        }
-        else if (pp == PivotPosition.LEFT) {
-            pivot = array[start];
-        }
-        else {
-            pivot = array[end];
-        }
-        return pivot;
-    }    
 }

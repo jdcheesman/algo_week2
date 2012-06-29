@@ -49,8 +49,7 @@ public class SorterTest {
         runTest(sorted, unsorted, 23);
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, unsorted, 36);
-        sorter.setPivotPosition(PivotPosition.RANDOM);
-        assertArrayEquals(sorted, sorter.sort(sorted));        
+      
     }
     
     @Test
@@ -64,8 +63,7 @@ public class SorterTest {
         runTest(sorted, unsorted, 5);
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, unsorted, 8);
-        sorter.setPivotPosition(PivotPosition.RANDOM);
-        assertArrayEquals(sorted, sorter.sort(sorted));        
+    
     }
     
     
@@ -80,8 +78,7 @@ public class SorterTest {
         runTest(sorted, unsorted,32);
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, unsorted, 48);
-        sorter.setPivotPosition(PivotPosition.RANDOM);
-        assertArrayEquals(sorted, sorter.sort(sorted));        
+       
     }    
     
     @Test
@@ -95,8 +92,7 @@ public class SorterTest {
         runTest(sorted, unsorted, 27);
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, unsorted, 48);     
-        sorter.setPivotPosition(PivotPosition.RANDOM);
-        assertArrayEquals(sorted, sorter.sort(sorted));        
+      
     }        
 
     @Test
@@ -110,8 +106,7 @@ public class SorterTest {
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, sorted, 52);        
         
-        sorter.setPivotPosition(PivotPosition.RANDOM);
-        assertArrayEquals(sorted, sorter.sort(sorted));
+
     }        
     
 
@@ -126,14 +121,13 @@ public class SorterTest {
         runTest(sorted, unsorted, 31);
         sorter.setPivotPosition(PivotPosition.RIGHT);
         runTest(sorted, unsorted, 52);    
-        sorter.setPivotPosition(PivotPosition.RANDOM);
-        assertArrayEquals(sorted, sorter.sort(sorted));        
+   
     }
 
     private void runTest(int[] sorted, int[] unsorted, int steps) {
-        int[] done = sorter.sort(unsorted);
-        assertEquals(sorted.length, done.length);
-        assertArrayEquals(sorted, done);
+        sorter.quickSort(unsorted);
+        assertEquals(sorted.length, unsorted.length);
+        assertArrayEquals(sorted, unsorted);
         assertEquals(steps, sorter.getNumberSteps());
     }
     
